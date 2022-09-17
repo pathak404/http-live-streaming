@@ -3,6 +3,10 @@
 //* Don't access this file directly
 defined('ABSPATH') or die();
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use Streaming\FFMpeg;
+
 $returnData = new stdClass();
 
 // save file
@@ -26,7 +30,15 @@ if(!file_exists($targetDir)){
 $fullVideoPath = $targetDir."data.m3u8";
 $tempVideoPath = $_FILES["videofile"]["tmp_name"];
 
-require("./view/hls-generate.php");
+$log = new Logger('FFmpeg_Streaming');
+$log->pushHandler(new StreamHandler('./view/logs/ffmpeg-streaming.log')); // path to log file
+$ffmpeg = FFMpeg::create($ffmpegConfig, $log);
+$video = $ffmpeg->open($tempVideoPath);
+$video->hls()
+    ->x264()
+    ->autoGenerateRepresentations()
+    ->save($fullVideoPath);
+    
 $returnData->status = "success";
 $returnData->message = generateURL($fullVideoPath);
 
