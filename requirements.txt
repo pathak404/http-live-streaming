@@ -1,0 +1,19 @@
+php.ini
+
+upload_max_filesize = 256M
+post_max_size = 257M
+memory_limit = 258M
+max_input_time = 300
+max_execution_time = 300
+
+
+
+
+ffmpeg + ffprobe 
+"aminyazdanpanah/php-ffmpeg-video-streaming": "^1.2",
+"monolog/monolog": "^2.8"
+    
+
+
+
+
