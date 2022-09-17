@@ -1,0 +1,9 @@
+{
+    "require": {
+        "aminyazdanpanah/php-ffmpeg-video-streaming": "^1.2",
+        "monolog/monolog": "^2.8"
+    },
+    "autoload": {
+        "files": ["view/config.php"]
+    }
+}
