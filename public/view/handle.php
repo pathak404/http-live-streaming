@@ -30,17 +30,19 @@ if(!file_exists($targetDir)){
 $fullVideoPath = $targetDir."data.m3u8";
 $tempVideoPath = $_FILES["videofile"]["tmp_name"];
 
+$returnData->status = "success";
+$returnData->message = generateURL($fullVideoPath);
+
 $log = new Logger('FFmpeg_Streaming');
 $log->pushHandler(new StreamHandler('./view/logs/ffmpeg-streaming.log')); // path to log file
 $ffmpeg = FFMpeg::create($ffmpegConfig, $log);
 $video = $ffmpeg->open($tempVideoPath);
 $video->hls()
     ->x264()
-    ->autoGenerateRepresentations()
+    ->autoGenerateRepresentations([1080, 720, 480, 360, 240])
     ->save($fullVideoPath);
     
-$returnData->status = "success";
-$returnData->message = generateURL($fullVideoPath);
+
 
 
 
