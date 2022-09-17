@@ -80,6 +80,7 @@ Header set Cache-Control "no-cache, no-store, must-revalidate"
 Header set Pragma "no-cache"
 Header set Expires 0
 Header set Access-Control-Allow-Origin "'.explode("//", $web)[1].'"
+Header set Access-Control-Allow-Methods "GET,POST"
 </IfModule>
 
 <Files .htaccess>

@@ -11,6 +11,7 @@ Header set X-Content-Type-Options "nosniff"
 Header set Cache-Control "no-cache, no-store, must-revalidate"
 Header set Pragma "no-cache"
 Header set Expires 0
+Header set Access-Control-Allow-Methods "GET,POST"
 </IfModule>
 
 <Files .htaccess>
