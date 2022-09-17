@@ -23,18 +23,13 @@ if(!file_exists($targetDir)){
     array_map( 'unlink', array_filter((array) glob($targetDir."*") ) );
 }
 
-$fullVideoPath = $targetDir.$filename."-".bin2hex(random_bytes(2)).".".$fileExt;
+$fullVideoPath = $targetDir."data.m3u8";
+$tempVideoPath = $_FILES["videofile"]["tmp_name"];
 
-// ToDo: check if file exist
-if( move_uploaded_file( $_FILES["videofile"]["tmp_name"], $fullVideoPath  ) ){
-    $returnData->status = "success";
-    require("./view/hls-generate.php");
-    $returnData->message = $targetDir."data.m3u8";
-    $returnData->message = generateURL($targetDir."data.m3u8");
-}else{
-    $returnData->status = "error";
-    $returnData->message = "Unable to save file";
-}
+require("./view/hls-generate.php");
+$returnData->status = "success";
+$returnData->message = generateURL($fullVideoPath);
+
 
 
 
@@ -76,7 +71,6 @@ if( move_uploaded_file( $_FILES["videofile"]["tmp_name"], $fullVideoPath  ) ){
         $returnData->target = 0;
         $fullVideoPath = "./.data/".$_POST["dir"]."/".$_POST["topic"]."/".$_POST["lesson"]."/".$_POST["videofile"];
         $returnData->message = generateURL($fullVideoPath);
-        // $returnData->message = $fullVideoPath;
     }
 
 }

@@ -13,11 +13,9 @@ $log->pushHandler(new StreamHandler('./view/logs/ffmpeg-streaming.log')); // pat
     
 $ffmpeg = FFMpeg::create($ffmpegConfig, $log);
 
-$video = $ffmpeg->open($fullVideoPath);
+$video = $ffmpeg->open($tempVideoPath);
 
 $video->hls()
     ->x264()
     ->autoGenerateRepresentations()
-    ->save($targetDir."data.m3u8");
-
-unlink($fullVideoPath);
+    ->save($fullVideoPath);
