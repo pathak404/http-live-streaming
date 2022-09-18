@@ -16,4 +16,9 @@ ffmpeg + ffprobe
 
 
 
+chmod 777 
+.htaccess
+.data
+view/logs/
+
 
