@@ -19,7 +19,7 @@
 
 <body>
 
-    <video id="video-js" class="video-js vjs-default-skin vjs-big-play-centered" controlslist="nodownload" preload="auto" controls>
+    <video id="video-js" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controlslist="nodownload" preload="auto" controls>
         <source src="<?php echo $videoPath ?>" type="application/x-mpegURL">
         <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
     </video>
