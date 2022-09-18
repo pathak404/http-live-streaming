@@ -39,7 +39,7 @@ if (isset($_GET["p"]) && !empty($_GET["p"])) {
 
     // user cookie verify
     if (MODE == "live") {
-        if (isset($_COOKIE["_2bc_user"])) {
+        if ( isset($_COOKIE["_2bc_user"]) && isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] == "https://2bytecode.in/" ) {
             $cookie = str_decryptaesgcm($_COOKIE["_2bc_user"], "\$abhi%@2bcCookie/", "base64");
             if ($cookie != "2bytecode@AbhiUser") {
                 exit("not matched");

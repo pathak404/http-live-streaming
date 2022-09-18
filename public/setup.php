@@ -67,7 +67,7 @@ Options -Indexes
 
 RewriteRule ^p/([^/]+)?$ index.php?p=$1 [L,QSA]
 
-RewriteCond %{REQUEST_URI} \.(mp4|m4v|avi|ts|m3u8|log)$ [NC]
+RewriteCond %{REQUEST_URI} \.(mp4|m4v|avi|log)$ [NC]
 RewriteCond %{HTTP_REFERER} !^'.$web.'.*$ [NC, OR]
 RewriteCond %{HTTP_REFERER} !^'.explode("//", $web)[0]."//assets.".explode("//", $web)[1].'.*$ [NC, OR]
 RewriteRule ^.* - [F,L]
