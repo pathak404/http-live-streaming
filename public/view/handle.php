@@ -15,8 +15,8 @@ if(isset($_POST["action"]) && $_POST["action"] == "save"){
 $courseDir =  $_POST["dir"];
 $topicDir =  $_POST["topic"];
 $lessonDir = $_POST["lesson"];
-$fileExt = pathinfo($_FILES['videofile']['name'], PATHINFO_EXTENSION);
-$filename = pathinfo($_FILES['videofile']['name'], PATHINFO_FILENAME);
+// $fileExt = pathinfo($_FILES['videofile']['name'], PATHINFO_EXTENSION);
+// $filename = pathinfo($_FILES['videofile']['name'], PATHINFO_FILENAME);
 
 $targetDir = "./.data/".$courseDir."/".$topicDir."/". $lessonDir."/";
 
@@ -27,22 +27,36 @@ if(!file_exists($targetDir)){
     array_map( 'unlink', array_filter((array) glob($targetDir."*") ) );
 }
 
-$fullVideoPath = $targetDir."data.m3u8";
-$tempVideoPath = $_FILES["videofile"]["tmp_name"];
+// ffmpeg
 
-$returnData->status = "success";
-$returnData->message = generateURL($fullVideoPath);
+// $fullVideoPath = $targetDir."data.m3u8";
+// $tempVideoPath = $_FILES["videofile"]["tmp_name"];
 
-$log = new Logger('FFmpeg_Streaming');
-$log->pushHandler(new StreamHandler('./view/logs/ffmpeg-streaming.log')); // path to log file
-$ffmpeg = FFMpeg::create($ffmpegConfig, $log);
-$video = $ffmpeg->open($tempVideoPath);
-$video->hls()
-    ->x264()
-    ->autoGenerateRepresentations([1080, 720, 480, 360, 240])
-    ->save($fullVideoPath);
-    
+// $returnData->status = "success";
+// $returnData->message = generateURL($fullVideoPath);
 
+// $log = new Logger('FFmpeg_Streaming');
+// $log->pushHandler(new StreamHandler('./view/logs/ffmpeg-streaming.log')); // path to log file
+// $ffmpeg = FFMpeg::create($ffmpegConfig, $log);
+// $video = $ffmpeg->open($tempVideoPath);
+// $video->hls()
+//     ->x264()
+//     ->autoGenerateRepresentations([1080, 720, 480, 360, 240])
+//     ->save($fullVideoPath);
+// end ffmpeg
+
+
+$fileFullName = $_FILES['videofile']['name'];
+$fullVideoPath = $targetDir.$fileFullName;
+
+
+if( move_uploaded_file( $_FILES["videofile"]["tmp_name"], $fullVideoPath  ) ){
+    $returnData->status = "success";
+    $returnData->message = generateURL($fullVideoPath);
+}else{
+    $returnData->status = "error";
+    $returnData->message = "Unable to save file";
+}
 
 
 

@@ -44,7 +44,13 @@ if (isset($_GET["p"]) && !empty($_GET["p"])) {
             if ($cookie != "2bytecode@AbhiUser") {
                 exit("not matched");
             }
-        } else {
+        }else if (isset($_COOKIE["_2bc_admin"])) {
+            $cookie = str_decryptaesgcm($_COOKIE["_2bc_admin"], "\$abhi%@2bcCookie/", "base64");
+            if ($cookie != "2bytecode@AbhiAdmin") {
+                exit("not matched");
+            }
+        }
+         else {
             exit("doesn't exist");
         }
     }
