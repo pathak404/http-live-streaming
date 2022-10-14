@@ -75,6 +75,14 @@ function generateURL($data){
 function decryptURLData($data){
     $data = str_replace(" ", "+", urldecode($data));
     $path = str_decryptaesgcm($data, "\$abhi%@2bc/");
+
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $url = "https://"; 
+    }
+    else  {
+        $url = "http://";   
+    }  
+    $url.= $_SERVER['HTTP_HOST'].$path;
     return $path;
     // return $data;
 }

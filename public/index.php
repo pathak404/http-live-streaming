@@ -1,9 +1,12 @@
 <?php
 
 define("ABSPATH", true);
-require "../vendor/autoload.php";
+define("APP_DIR", dirname(__DIR__)."/app");
+define("ROOT_DIR", __DIR__);
 
-define("ROOT_DIR", dirname(__DIR__));
+require APP_DIR."/vendor/autoload.php";
+
+
 
 // url = p/pagename
 if (isset($_GET["p"]) && !empty($_GET["p"])) {
@@ -23,13 +26,13 @@ if (isset($_GET["p"]) && !empty($_GET["p"])) {
 
 
     if ($_GET["p"] == "upload") {
-        require ROOT_DIR.'/view/upload.php';
+        require APP_DIR.'/view/upload.php';
         exit();
     } else if ($_GET["p"] == "handle") {
-        require ROOT_DIR.'/view/handle.php';
+        require APP_DIR.'/view/handle.php';
         exit();
     } else if ($_GET["p"] == "link") {
-        require ROOT_DIR.'/view/link.php';
+        require APP_DIR.'/view/link.php';
         exit();
     } else {
         http_response_code(404);
@@ -64,7 +67,7 @@ if (isset($_GET["p"]) && !empty($_GET["p"])) {
     }
 
 } else {
-    require ROOT_DIR.'/view/index-data.php';
+    require APP_DIR.'/view/index-data.php';
 }
 
 
@@ -72,8 +75,8 @@ if (isset($_GET["p"]) && !empty($_GET["p"])) {
 function getVideoTemplate()
 {
     $videoPath = decryptURLData($_GET["d"]);
-    if (file_exists($videoPath)) {
-        require(ROOT_DIR."/view/video.php");
+    if (file_exists(ROOT_DIR.$videoPath)) {
+        require(APP_DIR."/view/video.php");
     } else {
         die("{'status': 'Error', 'message': 'file not found'}");
     }
