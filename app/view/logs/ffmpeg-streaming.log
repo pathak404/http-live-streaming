@@ -8,7 +8,7 @@ ffmpeg -i "video.m4v" -preset fast -g 150 -sc_threshold 0 -threads 4 -map 0:v:0 
 
 // new (360 480 720 1080) 
 
-ffmpeg -i "video.mp4" -preset fast -g 150 -sc_threshold 0 -threads 4 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -filter:v:0 scale=h=360:w=-2 -minrate:v:0 138k -maxrate:v:0 400k -bufsize:v:0 552k -b:v:0 276k -filter:v:1 scale=h=480:w=-2 -minrate:v:1 375k -maxrate:v:1 1088k -bufsize:v:1 1500k -b:v:1 750k -filter:v:2 scale=h=720:w=-2 -minrate:v:2 512k -maxrate:v:2 1485k -bufsize:v:2 2048k -b:v:2 1024k -filter:v:3 scale=h=1080:w=-2 -minrate:v:3 800k -maxrate:v:3 1900k -bufsize:v:3 4096k -b:v:3 1400k -var_stream_map "v:0,a:0 v:1,a:1 v:2,a:2 v:3,a:3" -master_pl_name master.m3u8 -f hls -hls_time 10 -segment_time 10 -hls_list_size 0 -segment_format mpegts -hls_playlist_type vod -hls_segment_filename "res-%v/segment-%d.ts" res-%v/playlist.m3u8
+ffmpeg -i "video.mp4" -preset fast -g 150 -sc_threshold 0 -threads 4 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -filter:v:0 scale=h=360:w=-2 -minrate:v:0 138k -maxrate:v:0 400k -bufsize:v:0 552k -b:v:0 276k -filter:v:1 scale=h=480:w=-2 -minrate:v:1 375k -maxrate:v:1 1088k -bufsize:v:1 1500k -b:v:1 750k -filter:v:2 scale=h=720:w=-2 -minrate:v:2 512k -maxrate:v:2 1485k -bufsize:v:2 2048k -b:v:2 1024k -filter:v:3 scale=h=1080:w=-2 -minrate:v:3 800k -maxrate:v:3 1900k -bufsize:v:3 2400k -b:v:3 4096k -var_stream_map "v:0,a:0 v:1,a:1 v:2,a:2 v:3,a:3" -master_pl_name master.m3u8 -f hls -hls_time 10 -segment_time 10 -hls_list_size 0 -segment_format mpegts -hls_playlist_type vod -hls_segment_filename "res-%v/segment-%d.ts" res-%v/playlist.m3u8
 
 
 
