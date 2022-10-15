@@ -1,17 +1,4 @@
 
-working (division by 2 issue)
-
-ffmpeg -hide_banner -re -i "video.mp4" -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -c:v h264 -profile:v main -crf 20 -sc_threshold 0 -g 48 -keyint_min 48 -c:a aac -ar 48000 -filter:v:0 scale=w=640:h=360:force_original_aspect_ratio=decrease -maxrate:v:0 856k -bufsize:v:0 1200k -b:a:0 96k -filter:v:1 scale=w=842:h=480:force_original_aspect_ratio=decrease -maxrate:v:1 1498k -bufsize:v:1 2100k -b:a:1 128k -filter:v:2 scale=w=1280:h=720:force_original_aspect_ratio=decrease -maxrate:v:2 2996k -bufsize:v:2 4200k -b:a:2 128k -filter:v:3 scale=w=1920:h=1080:force_original_aspect_ratio=decrease -maxrate:v:3 5350k -bufsize:v:3 7500k -b:a:3 192k -var_stream_map "v:0,a:0 v:1,a:1 v:2,a:2 v:3,a:3" -hls_time 10 -master_pl_name master.m3u8 -hls_segment_filename %v_%"03d.ts" %"v.m3u8"
-
-
-// (playlist not generating)
-
-ffmpeg -y -i "video.mp4" -c:v libx264 -c:a aac -bf 1 -keyint_min 25 -g 250 -sc_threshold 40 -hls_list_size 0 -hls_time 10 -hls_playlist_type vod -master_pl_name playlist.m3u8 -hls_allow_cache 1 -hls_segment_type mpegts -hls_fmp4_init_filename data_360p_init.mp4 -hls_segment_filename "data_360p_"^%"04d.ts" -s:v 640x360 -b:v 588k -strict -2 "data_360p.m3u8" -c:v libx264 -c:a aac -bf 1 -keyint_min 25 -g 250 -sc_threshold 40 -hls_list_size 0 -hls_time 10 -hls_playlist_type vod -master_pl_name playlist.m3u8 -hls_allow_cache 1 -hls_segment_type mpegts -hls_fmp4_init_filename data_480p_init.mp4 -hls_segment_filename "data_480p_"^%"04d.ts" -s:v 854x480 -b:v 784k -strict -2 "data_480p.m3u8" -c:v libx264 -c:a aac -bf 1 -keyint_min 25 -g 250 -sc_threshold 40 -hls_list_size 0 -hls_time 10 -hls_playlist_type vod -master_pl_name playlist.m3u8 -hls_allow_cache 1 -hls_segment_type mpegts -hls_fmp4_init_filename data_720p_init.mp4 -hls_segment_filename "data_720p_"^%"04d.ts" -s:v 1280x720 -b:v 1177k -strict -2 -threads 12 "data_720p.m3u8" -c:v libx264 -c:a aac -bf 1 -keyint_min 25 -g 250 -sc_threshold 40 -hls_list_size 0 -hls_time 10 -hls_playlist_type vod -master_pl_name playlist.m3u8 -hls_allow_cache 1 -hls_segment_type mpegts -hls_fmp4_init_filename data_1080p_init.mp4 -hls_segment_filename "data_1080p_"^%"04d.ts" -s:v 1920x1080 -b:v 7500k -strict -2 -threads 12 "data_1080p.m3u8"
-
-
-
-
-
 
 // new 240 360 480 720 1080
 
@@ -22,5 +9,8 @@ ffmpeg -i "video.m4v" -preset fast -g 150 -sc_threshold 0 -threads 4 -map 0:v:0 
 // new (360 480 720 1080) 
 
 ffmpeg -i "video.mp4" -preset fast -g 150 -sc_threshold 0 -threads 4 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -map 0:v:0 -map 0:a:0 -filter:v:0 scale=h=360:w=-2 -minrate:v:0 138k -maxrate:v:0 400k -bufsize:v:0 552k -b:v:0 276k -filter:v:1 scale=h=480:w=-2 -minrate:v:1 375k -maxrate:v:1 1088k -bufsize:v:1 1500k -b:v:1 750k -filter:v:2 scale=h=720:w=-2 -minrate:v:2 512k -maxrate:v:2 1485k -bufsize:v:2 2048k -b:v:2 1024k -filter:v:3 scale=h=1080:w=-2 -minrate:v:3 800k -maxrate:v:3 1900k -bufsize:v:3 4096k -b:v:3 1400k -var_stream_map "v:0,a:0 v:1,a:1 v:2,a:2 v:3,a:3" -master_pl_name master.m3u8 -f hls -hls_time 10 -segment_time 10 -hls_list_size 0 -segment_format mpegts -hls_playlist_type vod -hls_segment_filename "res-%v/segment-%d.ts" res-%v/playlist.m3u8
+
+
+
 
 
