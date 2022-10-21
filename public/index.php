@@ -74,11 +74,11 @@ if (isset($_GET["p"]) && !empty($_GET["p"])) {
 
 function getVideoTemplate()
 {
-    // $videoPath = decryptURLData($_GET["d"]);
-    $videoPath = $_GET["d"];
-    if (file_exists(ROOT_DIR.$videoPath)) {
+    $videoPath = decryptURLData($_GET["d"]);
+    // $videoPath = $_GET["d"];
+    // if (file_exists(ROOT_DIR.$videoPath)) {
         require(APP_DIR."/view/video.php");
-    } else {
-        die("{'status': 'Error', 'message': 'file not found'}");
-    }
+    // } else {
+    //     die("{'status': 'Error', 'message': 'file not found'}");
+    // }
 }

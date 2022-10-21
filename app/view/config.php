@@ -83,6 +83,19 @@ function decryptURLData($data){
         $url = "http://";   
     }  
     $url.= $_SERVER['HTTP_HOST'].$path;
-    return $path;
+    return $url;
     // return $data;
+}
+
+
+function getCompleteURL($path)
+{
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $url = "https://"; 
+    }
+    else  {
+        $url = "http://";   
+    }  
+    $url.= $_SERVER['HTTP_HOST'].$path;
+    return $url;
 }

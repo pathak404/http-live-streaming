@@ -15,11 +15,23 @@
         padding: 0;
         margin: 0;
     }
+    body{
+        background-color: #121212;
+    }
+    #video-js {
+        max-height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        z-index: 110;
+   }
 </style>
 
 <body>
 
-    <video id="video-js" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controlslist="nodownload" preload="auto" controls>
+    <video id="video-js" class="video-js vjs-default-skin vjs-big-play-centered vjs-fill" controlslist="nodownload" preload="auto" controls>
         <source src="<?php echo $videoPath ?>" type="application/x-mpegURL">
         <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
     </video>

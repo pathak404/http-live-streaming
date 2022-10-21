@@ -28,8 +28,8 @@ $fullVideoPath = $targetDir.$fileFullName;
 
 if( move_uploaded_file( $_FILES["videofile"]["tmp_name"], $fullVideoPath  ) ){
     $returnData->status = "success";
-    // $returnData->message = generateURL($relativeDir.$fileFullName);
-    $returnData->message = $relativeDir.$fileFullName;
+    $returnData->message = generateURL($relativeDir.$fileFullName);
+    // $returnData->message = getCompleteURL($relativeDir.$fileFullName);
 }else{
     $returnData->status = "error";
     $returnData->message = "Unable to save file";
@@ -72,8 +72,8 @@ if( move_uploaded_file( $_FILES["videofile"]["tmp_name"], $fullVideoPath  ) ){
     else if( !empty($_POST["dir"]) && isset($_POST["topic"]) && isset($_POST["lesson"]) && isset($_POST["videofile"]) && $_POST["topic"] != "null" && $_POST["lesson"] != "null" && $_POST["videofile"] != "null" ) {
         $returnData->target = 0;
         $fullVideoPath = "/.data/".$_POST["dir"]."/".$_POST["topic"]."/".$_POST["lesson"]."/".$_POST["videofile"];
-        // $returnData->message = generateURL($fullVideoPath);
-        $returnData->message = $fullVideoPath;
+        $returnData->message = generateURL($fullVideoPath);
+        // $returnData->message = getCompleteURL($fullVideoPath);
     }
 }
 
