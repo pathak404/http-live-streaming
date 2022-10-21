@@ -37,6 +37,7 @@
     </video>
 
     <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
         var player = videojs('video-js', {
             responsive: true,
             playbackRates: [0.25, 0.5, 1, 1.5, 2],
