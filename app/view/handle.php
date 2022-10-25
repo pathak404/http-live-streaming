@@ -65,7 +65,15 @@ if( move_uploaded_file( $_FILES["videofile"]["tmp_name"], $fullVideoPath  ) ){
         $arrayDirs = array();
         foreach (scandir(ROOT_DIR."/.data/".$_POST["dir"]."/".$_POST["topic"]."/".$_POST["lesson"]."/") as $single) {
             if($single == "." || $single == "..") continue;
-            if(is_file(ROOT_DIR."/.data/".$_POST["dir"]."/".$_POST["topic"]."/".$_POST["lesson"]."/".$single)) array_push($arrayDirs, $single);
+            if(is_dir(ROOT_DIR."/.data/".$_POST["dir"]."/".$_POST["topic"]."/".$_POST["lesson"]."/".$single)){
+                foreach(scandir(ROOT_DIR."/.data/".$_POST["dir"]."/".$_POST["topic"]."/".$_POST["lesson"]."/".$single) as $file){
+                    if($file == "." || $file == "..") continue;
+                    array_push($arrayDirs, $single."/".$file);
+                }
+            }
+            if(is_file(ROOT_DIR."/.data/".$_POST["dir"]."/".$_POST["topic"]."/".$_POST["lesson"]."/".$single)){
+                array_push($arrayDirs, $single);
+            }  
         }
         $returnData->options = $arrayDirs;
     }
