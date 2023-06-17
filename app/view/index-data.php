@@ -27,12 +27,16 @@ defined('ABSPATH') or die();
       width: 100%;
       max-width: 1200px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
     }
     h1 {
       font-family: "Verdana", sans-serif;
       font-size: 3.5rem;
+    }
+    .mb {
+      margin-bottom: 1.5rem;
     }
     @media only screen and (max-width: 500px) {
       h1 {
@@ -45,7 +49,10 @@ defined('ABSPATH') or die();
 </head>
 <body>
     <div class="container">
-      <h1>Abhi khali hai bhai 🙂</h1>
+      <h1 class="mb">Hi 👋</h1>
+      <p class="mb">Check out these pages...</p>
+      <p class="mb"><a href="/p/upload">Upload a video</a></p>
+      <p class="mb"><a href="/p/link">Get link of video</a></p>
     </div>
     
 </body>
