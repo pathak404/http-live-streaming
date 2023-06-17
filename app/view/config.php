@@ -1,25 +1,6 @@
 <?php
 
-$localhost = array(
-    '127.0.0.1',
-    '::1'
-);
-
-
-if(in_array($_SERVER['REMOTE_ADDR'], $localhost)){
-
-    define("MODE", "dev");
-
-}else{
-
-    define("MODE", "live");
-}
-
-
-
-
-
-
+define("KEYPHRASE", "6f8b022801da87bdc350");
 
 
 function str_encryptaesgcm($plaintext, $password, $encoding = "hex") {
@@ -59,11 +40,9 @@ function generateURL($data){
     else  {
         $url = "http://";   
     }  
-    $url.= $_SERVER['HTTP_HOST']."/?d="; 
-    return $url.urlencode(str_encryptaesgcm($data, "\$abhi%@2bc/"));
+    $url.= $_SERVER['HTTP_HOST']."/?v="; 
+    return $url.urlencode(str_encryptaesgcm($data, KEYPHRASE));
 
-    // $url.= $_SERVER['HTTP_HOST'].$data; 
-    // return $url;
 }
 
 
@@ -74,7 +53,7 @@ function generateURL($data){
 */
 function decryptURLData($data){
     $data = str_replace(" ", "+", urldecode($data));
-    $path = str_decryptaesgcm($data, "\$abhi%@2bc/");
+    $path = str_decryptaesgcm($data, KEYPHRASE);
 
     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
         $url = "https://"; 
@@ -84,7 +63,6 @@ function decryptURLData($data){
     }  
     $url.= $_SERVER['HTTP_HOST'].$path;
     return $url;
-    // return $data;
 }
 
 
