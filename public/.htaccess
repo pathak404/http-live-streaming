@@ -3,16 +3,23 @@ Options -Indexes
 
 RewriteRule ^p/([^/]+)?$ index.php?p=$1 [L,QSA]
 
+# RewriteCond %{REQUEST_URI} \.(mp4|m4v|avi|log)$ [NC]
+# RewriteCond %{HTTP_REFERER} !^URL1*$ [NC, OR]
+# RewriteCond %{HTTP_REFERER} !^URL2*$ [NC, OR]
+# RewriteRule ^.* - [F,L]
 
 <IfModule mod_headers.c>
-Header set Access-Control-Allow-Origin "*"
-Header set Cache-Control "no-cache, no-store, must-revalidate"
-Header set Pragma "no-cache"
-Header set Expires 0
-Header set Access-Control-Allow-Methods "GET,POST"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+    # Header set Access-Control-Allow-Origin "URL"
+    Header set Access-Control-Allow-Methods "GET,POST"
 </IfModule>
 
 <Files .htaccess>
-Order allow,deny
-Deny from all
+    Order allow,deny
+    Deny from all
 </Files>
