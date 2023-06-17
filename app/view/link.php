@@ -25,7 +25,7 @@ defined('ABSPATH') or die();
 <body>
 
     <form id="linkGenerateForm" onsubmit="return ">
-
+        <p>For HLS, In video file, choose master.m3u8 file</p>
         <select name="dir" onchange="selectOnChange(this)">
             <option value="null" selected>Choose Course Dir</option>
             <?php
